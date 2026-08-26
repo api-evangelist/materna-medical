@@ -1,17 +1,39 @@
 aid: materna-medical
 name: Materna Medical
-description: 'Materna Medical is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Materna Medical is a Mountain View, California women''s health medical
+  device company building an OBGYN platform around pelvic floor health. Its first
+  product, Milli, is an expanding vaginal dilator that widens one millimeter at a time
+  with optional vibration, sold direct-to-consumer and through OBGYN and pelvic floor
+  physical therapy practices for vaginismus, dyspareunia, postpartum recovery and
+  menopause-related painful sex; it launched as a wellness trainer in 2019 and received
+  FDA over-the-counter clearance in 2023. Its second product, Ellora, is an investigational
+  device used during labor to reduce pelvic floor muscle injury in vaginal delivery,
+  studied in the randomized EASE trial across US hospitals and assigned a new ICD-10-PCS
+  technology code effective April 2026. Materna Medical sells regulated physical devices
+  and clinical evidence, not software: it operates a WordPress marketing site
+  (maternamedical.com) and a WooCommerce consumer storefront (hellomilli.com), publishes
+  no developer program, no public API, no SDK and no machine-readable API contract, and
+  runs no api., developer., docs. or app. subdomain.'
+image: https://www.maternamedical.com/wp-content/uploads/2024/10/materna-medical-logo-full-color.svg
 url: https://raw.githubusercontent.com/api-evangelist/materna-medical/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
 x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-25'
 modified: '2026-08-25'
 tags:
 - Company
+- Health Care
+- Medical Devices
+- Women's Health
+- Pelvic Health
+- OBGYN
+- Maternal Health
+- Consumer Health
+- Clinical Trials
+- Medical Technology
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -20,4 +42,64 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://www.maternamedical.com/
+- type: About
+  url: https://www.maternamedical.com/about/
+- type: Product
+  url: https://www.hellomilli.com/vaginal-dilator/
+- type: Store
+  url: https://www.hellomilli.com/
+- type: Blog
+  url: https://www.hellomilli.com/blog/
+- type: News
+  url: https://www.maternamedical.com/media/
+- type: Support
+  url: https://www.hellomilli.com/contact-us/
+- type: Contact
+  url: https://www.maternamedical.com/contact/
+- type: FAQ
+  url: https://www.hellomilli.com/faqs/
+- type: PrivacyPolicy
+  url: https://www.hellomilli.com/privacy-policy/
+- type: TermsOfService
+  url: https://www.hellomilli.com/terms-of-service/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/materna-medical/
+- type: Research
+  url: https://www.maternamedical.com/data-bibliography/
+- type: DomainSecurity
+  url: security/materna-medical-domain-security.yml
+- type: LLMsTxt
+  url: llms/materna-medical-llms.txt
+
+x-enrichment:
+  date: '2026-08-25'
+  status: minimal
+  artifacts_added: 3
+  pass: local-v1
+
+x-coverage:
+  state: none
+  reason: not-a-software-company
+  detail: Materna Medical sells regulated physical devices — the FDA-cleared Milli vaginal
+    dilator and the investigational Ellora labor device — through a WordPress marketing site
+    and a WooCommerce storefront; every OpenAPI, GraphQL, MCP and agent-card path on
+    www.maternamedical.com and www.hellomilli.com returns 404, api./developer./docs./app./mcp.
+    subdomains are NXDOMAIN, there is no GitHub organization, and getmilli.com is a parked
+    domain whose blanket 200s are a JS redirect shell to /lander.
+  evidence:
+  - url: https://www.maternamedical.com/openapi.json
+    status: 404
+  - url: https://www.maternamedical.com/llms.txt
+    status: 404
+  - url: https://www.maternamedical.com/.well-known/agent-card.json
+    status: 404
+  - url: https://www.hellomilli.com/openapi.json
+    status: 404
+  - url: https://www.hellomilli.com/.well-known/security.txt
+    status: 404
+  - url: https://api.github.com/orgs/materna-medical
+    status: 404
+  - url: https://getmilli.com/openapi.json
+    status: 200
+  checked: '2026-08-25'

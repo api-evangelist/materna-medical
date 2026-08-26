@@ -1,0 +1,126 @@
+generated: '2026-08-25'
+method: probed
+source: live HTTP probes of www.maternamedical.com, www.hellomilli.com and getmilli.com
+note: >-
+  No /.well-known document is served by any Materna Medical host, so NO WellKnown and NO
+  SecurityTxt pointer is wired — this file records an absence, not a presence. Both live
+  properties are WordPress/Avada sites: www.maternamedical.com (WP Engine) returns an honest
+  404 for /.well-known/security.txt from nginx and the themed WordPress 404 page for the
+  remaining paths; www.hellomilli.com (WooCommerce behind Cloudflare) behaves identically.
+  getmilli.com is a PARKED domain — a 114-byte HTML shell that JavaScript-redirects every
+  path, including the site root, to /lander with window._trfd.push({ap:"parking"}), so its
+  blanket HTTP 200s are a catch-all and are recorded as soft-404s, not documents. No path on
+  any host returned a document, so hit_count is 0.
+hit_count: 0
+hosts:
+- host: https://www.maternamedical.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: text/html
+    note: nginx 404, 548 bytes
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: text/html
+    note: WordPress themed 404 page, 72,634 bytes
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: text/html
+    note: WordPress themed 404 page
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: text/html
+    note: WordPress themed 404 page
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: text/html
+    note: WordPress themed 404 page
+- host: https://www.hellomilli.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    content_type: text/html
+    note: nginx 404, 548 bytes
+  - path: /.well-known/openid-configuration
+    status: 404
+    content_type: text/html
+    note: WordPress themed 404 page, 1,492,564 bytes
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 404
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    content_type: text/html
+- host: https://getmilli.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    note: >-
+      Not a document. Parked-domain catch-all — identical 114-byte JS redirect shell to
+      /lander that every path on this host returns.
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: text/html
+    note: Parked-domain catch-all, 114 bytes
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: text/html
+    note: Parked-domain catch-all, 114 bytes
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: text/html
+    note: Parked-domain catch-all, 114 bytes
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    note: Parked-domain catch-all, 114 bytes
+x-evidence:
+  fetched: '2026-08-25'
+  hosts_probed:
+  - www.maternamedical.com
+  - www.hellomilli.com
+  - getmilli.com
+  soft_404_control:
+    url: https://getmilli.com/openapi.json
+    status: 200
+    bytes: 114
+    body: '<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href="/lander"}</script></head></html>'
+    verdict: >-
+      Every path on getmilli.com returns this byte-identical body, so a 200 from this host
+      carries no information about what it serves.
+  agent_card_probes:
+  - url: https://www.maternamedical.com/.well-known/agent-card.json
+    status: 404
+  - url: https://www.maternamedical.com/.well-known/agent.json
+    status: 404
+  - url: https://www.hellomilli.com/.well-known/agent-card.json
+    status: 404
+  - url: https://www.hellomilli.com/.well-known/agent.json
+    status: 404
+  - url: https://getmilli.com/.well-known/agent-card.json
+    status: 200
+    verdict: parked-domain catch-all HTML, not an AgentCard — rejected, nothing written to a2a/
+  other_paths:
+  - url: https://www.maternamedical.com/robots.txt
+    status: 200
+  - url: https://www.maternamedical.com/sitemap_index.xml
+    status: 200
+  - url: https://www.maternamedical.com/llms.txt
+    status: 404
+  - url: https://www.hellomilli.com/robots.txt
+    status: 200
+  - url: https://www.hellomilli.com/llms.txt
+    status: 404
+  - url: https://getmilli.com/llms.txt
+    status: 200
+    verdict: >-
+      Served, but it is a robots.txt-shaped file (User-agent/Allow/Disallow-Training/Sitemap),
+      not an llms.txt in the llms.txt format, and it sits on the parked domain.
+  subdomains:
+    note: >-
+      api., dev., developer., docs., app., platform., mcp., portal. and shop..maternamedical.com
+      are all NXDOMAIN — there is no developer host to probe.
