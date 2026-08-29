@@ -14,6 +14,17 @@ description: 'Materna Medical is a Mountain View, California women''s health med
   (maternamedical.com) and a WooCommerce consumer storefront (hellomilli.com), publishes
   no developer program, no public API, no SDK and no machine-readable API contract, and
   runs no api., developer., docs. or app. subdomain.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.maternamedical.com/wp-content/uploads/2024/10/materna-medical-logo-full-color.svg
 url: https://raw.githubusercontent.com/api-evangelist/materna-medical/refs/heads/main/apis.yml
 x-type: company
